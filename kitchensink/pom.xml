@@ -205,6 +205,19 @@
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.1.1.Final</version>
             </plugin>
+            <plugin>
+                <groupId>org.fakereplace</groupId>
+                <artifactId>fakereplace-plugin</artifactId>
+                <version>0.10-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>fakereplace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
