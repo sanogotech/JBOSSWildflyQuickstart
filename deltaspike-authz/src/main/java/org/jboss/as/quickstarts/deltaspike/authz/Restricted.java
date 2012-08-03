@@ -13,6 +13,11 @@ import javax.enterprise.util.Nonbinding;
 
 import org.apache.deltaspike.security.api.authorization.annotation.SecurityBindingType;
 
+/**
+ * A security binding which takes a role
+ * @author pmuir
+ *
+ */
 @Retention(RUNTIME)
 @Target({METHOD, TYPE})
 @SecurityBindingType

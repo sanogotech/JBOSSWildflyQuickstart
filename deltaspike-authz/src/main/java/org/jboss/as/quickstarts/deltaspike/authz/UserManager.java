@@ -5,6 +5,12 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 
+/**
+ * A really simple user manager.
+ * 
+ * @author Pete Muir
+ *
+ */
 @SuppressWarnings("serial")
 @SessionScoped
 public class UserManager implements Serializable {

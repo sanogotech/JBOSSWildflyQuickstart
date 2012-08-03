@@ -1,4 +1,5 @@
 package org.jboss.as.quickstarts.deltaspike.authz;
+
 /**
  * JBoss, Home of Professional Open Source
  * Copyright 2012, Red Hat, Inc., and individual contributors
@@ -16,8 +17,6 @@ package org.jboss.as.quickstarts.deltaspike.authz;
  * limitations under the License.
  */
 
-
-
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -25,15 +24,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 /**
- * A simple REST service which is able to say hello to either an Admin or a User
- *
- * @author bsutter@redhat.com
+ * A simple REST service which allows a user to "log in". We trust the user is who they say they are.
+ * 
  * @author Pete Muir
  */
 
 @Path("/login")
 public class LoginService {
-    
+
     @Inject
     private UserManager userManager;
 
