@@ -11,7 +11,7 @@ public class Authorizer {
     public boolean authorize(InvocationContext ctx, @LoggedIn String user) {
 
         // Hardcode a user to be the admin
-        Role userRole = user == "admin" ? Role.ADMIN : Role.USER;
+        Role userRole = "admin".equals(user) ? Role.ADMIN : Role.USER;
         
         // Get the required role
         Role requiredRole = getRequiredRole(ctx);
