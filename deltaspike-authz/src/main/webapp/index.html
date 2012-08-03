@@ -1,0 +1,105 @@
+<!--
+
+    JBoss, Home of Professional Open Source
+    Copyright 2012, Red Hat, Inc., and individual contributors
+    by the @authors tag. See the copyright.txt in the distribution for a
+    full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>DeltaSpike Authz</title>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript"> 
+$(document).ready(function() {
+	$('#sayHello').click(function() {
+		var name = $('#name').val();
+        var jqxhr = $.ajax('rest/hello/' + name, {
+            dataType:'json',
+            data:{},
+            type:'POST',
+            success:function (data) {
+                $('#result').text(data.result);
+            }
+        })
+		.error(function() {
+		}
+		);
+		return false; // prevents submit of the form
+	});
+
+    $('#sayHello_from_admin').click(function() {
+        var name = $('#name_from_admin').val();
+        var jqxhr = $.ajax('rest/hello/admin/' + name, {
+            dataType:'json',
+            data:{},
+            type:'POST',
+            success:function (data) {
+                $('#result_from_admin').text(data.result);
+            }
+        })
+        .error(function() {
+        }
+        );
+        return false; // prevents submit of the form
+    });
+
+    $('#login').click(function() {
+        var username = $('#username').val();
+        var jqxhr = $.ajax('rest/login/' + username, {
+            dataType:'json',
+            data:{},
+            type:'POST',
+        })
+        .error(function() {
+            //console.log("error");
+        }
+        );
+        return false; // prevents submit of the form
+    });
+    
+}); // (document).read
+</script>
+</head>
+<body>
+<h3>Say Hello!</h3>
+<form name="hello">
+ <fieldset>  
+    <label for="name" id="name_label">Name</label> 
+	<input name="name" id="name" type="text" required placeholder="Your Name"/>
+    <input type="submit" id="sayHello" value="Say Hello"/><span id="result"></span>
+ </fieldset>
+</form>
+
+<h3>Say Hello from an admin!</h3>
+<form name="hello_from_admin">
+ <fieldset>  
+    <label for="name_from_admin" id="name_from_admin_label">Name</label> 
+    <input name="name_from_admin" id="name_from_admin" type="text" required placeholder="Your Name"/>
+    <input type="submit" id="sayHello_from_admin" value="Say Hello"/><span id="result_from_admin"></span>
+ </fieldset>
+</form>
+
+<h3>Login</h3>
+<form name="login">
+ <fieldset>  
+    <label for="username" id="username_label">Username</label> 
+    <input name="username" id="username" type="text" required placeholder="Username"/>
+    <input type="submit" id="login" value="Login"/>
+ </fieldset>
+</form>
+
+</body>
+</html>
