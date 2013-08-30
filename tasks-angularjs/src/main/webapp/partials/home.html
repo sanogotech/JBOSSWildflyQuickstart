@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!-- This is a partial, and is templated by AngularJS -->
+<div class="container">
+    <h1 class="text-center">todos</h1>
+    
+    <table class="table table-bordered" align="center">
+        <tr>
+            <td></td>
+            <td>
+                <!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
+                <form id="add" ng-submit="submit()">
+                    <fieldset>
+                        <!-- Each input is bound to a property on the prototype newMember object -->
+                        <div>
+                            <input type="text" name="title" id="title" class="form-control"  ng-model="newTask.title" placeholder="What needs to be done?" required autofocus/>
+                            <span class="error" ng-show="errors.title">{{errors.title}}</span>
+                        </div>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+        <!-- The table is built using the AngularJS repeat function, iterating over the members variable, and ordering by the property specified in the orderBy variable -->
+        <tr ng-repeat="task in tasks | filter:search | filter:displayFilter">
+            <td><i ng-show="task.complete" class="icon-ok completed" ng-click="markComplete(task, false)"/><i ng-hide="task.complete" class="icon-ok" ng-click="markComplete(task, true)"/></td>
+            <td>{{task.title}}</td>
+        </tr>
+    </table>
+    <div ng-hide="tasks.length == 0" class="row">
+        <div class="col-xs-6">
+            {{remainingTaskCount}}
+            <span ng-show="remainingTaskCount == 0">item</span>
+            <span ng-hide="remainingTaskCount == 0">items</span>
+             remaining
+        </div>
+        <div class="col-xs-6">
+            <label class="radio-inline"><input type="radio" value="all" ng-model="display" ng-click="redisplay()">All</label>
+            <label class="radio-inline"><input type="radio" value="active" ng-model="display" ng-click="redisplay()">Active</label>
+            <label class="radio-inline"><input type="radio" value="complete" ng-model="display" ng-click="redisplay()">Completed</label>
+        </div>
+    </div>
+        
+</div>
