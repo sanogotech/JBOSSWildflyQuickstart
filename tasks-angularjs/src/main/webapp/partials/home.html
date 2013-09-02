@@ -36,7 +36,7 @@
         <!-- The table is built using the AngularJS repeat function, iterating over the members variable, and ordering by the property specified in the orderBy variable -->
         <tr ng-repeat="task in tasks | filter:search | filter:displayFilter">
             <td class="notepad-margin"><i ng-show="task.complete" class="icon-ok completed" ng-click="markComplete(task, false)"/><i ng-hide="task.complete" class="icon-ok" ng-click="markComplete(task, true)"/></td>
-            <td class="notepad-main show-task" ng-hide="task.editing" ng-dblclick="setEditFlag(task)">
+            <td class="notepad-main show-task" ng-hide="task.editing" ng-click="setEditFlag(task)">
                 {{task.title}}
             </td>
             <td class="notepad-main edit-task" ng-show="task.editing">
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="row help">
-        Double-click to edit a todo
+        Click to edit a todo
     </div>
     
 
