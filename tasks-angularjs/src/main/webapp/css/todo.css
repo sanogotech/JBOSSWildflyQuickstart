@@ -1,3 +1,96 @@
 .completed {
 	color: green;
 }
+
+/*
+  Hide radio button (the round disc)
+  we will use just the label to create pushbutton effect
+*/
+.display-controls input[type=radio] {
+    display:none; 
+    margin:10px;
+}
+
+.display-controls {
+/* 	border-left:1px solid black; */
+/* 	border-right:1px solid black; */
+/* 	border-bottom:1px solid black; */
+}
+ 
+/*
+
+/*
+ Change the font weight for the checked element
+*/
+.display-controls input[type=radio]:checked + label{ 
+   font-weight: bold;
+}
+
+.help {
+	font-size: x-small;
+	color: grey;
+	text-align:center;
+}
+
+.notepad {
+	font-size: large;
+}
+
+table.notepad {
+    width: 100%;
+}
+
+.new-task form {
+	margin-bottom: 0px;
+	margin-top:10px;
+}
+
+.edit-task form {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.notepad-margin {
+	background-image: url('../img/notepad-margin.jpg');
+	width: 65px;
+}
+
+.notepad-main {
+    background-image: url('../img/notepad-main.jpg');
+}
+
+.notepad td {
+	padding-left: 10px;
+	background-position: left bottom;
+    nackground-repeat: no-repeat;
+    padding-bottom:8px;
+}
+
+.notepad input {
+	min-width: 300px;
+	border: 0px;
+	box-shadow: 0px 0px 0px 0px;
+	outline: none;
+	vertical-align: bottom;
+	font-size: large;
+}
+
+.new-task input {
+	font-size: x-large;
+	min-height: 30px;
+}
+
+.show-task {
+	padding-top:1px;
+}
+
+.edit-task input {
+	margin-bottom: 0px;
+	padding: 0px;
+}
+
+input:focus:invalid:focus, input[type="text"]:focus {
+	border: 0px;
+	box-shadow: 0px 0px 0px 0px;
+	outline: 0px;
+}

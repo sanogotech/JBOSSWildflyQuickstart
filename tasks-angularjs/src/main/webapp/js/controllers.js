@@ -16,23 +16,27 @@
  */
 function TasksCtrl($scope, $http, Tasks) {
 
-    $scope.countRemaining = function(tasks) {
-        $scope.remainingTaskCount = 0;
+    $scope.countCompleted = function(tasks) {
+        $scope.completedTaskCount = 0;
         for (var i=0; i< tasks.length; i++) {
-            if (tasks[i].complete == false) {
-                $scope.remainingTaskCount++;
+            if (tasks[i].complete == true) {
+                $scope.completedTaskCount++;
             }
+        }
+        $scope.taskCount = tasks.length;
+        if (window.console) {
+            console.debug($scope.completedTaskCount + ' of ' + $scope.taskCount + ' tasks completed')
         }
     };
     
     // Define a refresh function, that updates the data from the REST service
     $scope.refresh = function() {
         $scope.tasks = Tasks.query(function(data) {
-            $scope.countRemaining(data);
+            $scope.countCompleted(data);
         });
     };
     
-    // Define a redisplay function, that updates the data from the REST service
+    // Define a redisplay function.
     $scope.redisplay = function() {
     };
 
@@ -45,13 +49,13 @@ function TasksCtrl($scope, $http, Tasks) {
 
     // Define a submit function, which adds the task using the REST service,
     // and displays any error messages
-    $scope.submit = function() {
+    $scope.submit = function(task) {
         $scope.errors = {};
-
-        Tasks.save($scope.newTask, function(data) {
+        clearEditFlags();
+        Tasks.save(task, function(data) {
 
             // log a success message to the console
-            if (window.console) console.info('Task Created: ' + $scope.newTask.title)
+            if (window.console) console.info('Task Created: ' + task.title)
 
             // Update the list of tasks
             $scope.refresh();
@@ -74,24 +78,53 @@ function TasksCtrl($scope, $http, Tasks) {
             return true;
     };
     
+    $scope.markAllComplete = function(completed) {
+        if (window.console) {
+            if (completed) {
+                console.info('All tasks marked complete');
+            } else {
+                console.info('All tasks marked incomplete');
+            }
+        }
+        for (var i=0; i< $scope.tasks.length; i++) {
+            _markComplete($scope.tasks[i], completed);
+        }
+        $scope.countCompleted($scope.tasks);
+    };
+    
     $scope.markComplete = function(task, completed) {
+        _markComplete(task, completed);
+        $scope.countCompleted($scope.tasks);
+    };
+    
+    function _markComplete(task, completed) {
         task.complete = completed;
         Tasks.save(task, function(data) {
             // log a success message to the console
             if (window.console) {
                 if (completed) {
-                    console.info('Task marked complete: ' + task.title);
+                    console.info('Task marked complete on server: ' + task.title);
                 } else {
-                    console.info('Task marked incomplete: ' + task.title);
+                    console.info('Task marked incomplete on server: ' + task.title);
                 }
             }
-            $scope.countRemaining($scope.tasks);
+            
         }, function(result) {
             // log an error message to the console
             if (window.console) console.error('Response code' + result.status + ': ' + result.data);
         });
-    }
-
+    };
+    
+    function clearEditFlags() {
+        for (var i=0; i< $scope.tasks.length; i++) {
+            delete $scope.tasks[i]['editing'];
+        }
+    };
+    
+    $scope.setEditFlag = function(task){
+        clearEditFlags();
+        task.editing=true;
+    };
     
     $scope.display = 'all';
 
