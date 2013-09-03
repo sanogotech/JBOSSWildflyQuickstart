@@ -28,7 +28,7 @@
                 <!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
                 <form id="add" ng-submit="submit(newTask)">
                     <!-- Each input is bound to a property on the prototype newMember object -->
-                    <input type="text" name="title" id="title" ng-model="newTask.title" placeholder="What needs to be done?" autofocus/>
+                    <input type="text" name="title" id="title" ng-model="newTask.title" placeholder="What needs to be done?"  ng-blur="submit(newTask)" autofocus/>
                     <span class="error" ng-show="errors.title">{{errors.title}}</span>
                 </form>
             </td>
@@ -43,7 +43,7 @@
                 <!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
                 <form id="add" ng-submit="submit(task)">
                     <!-- Each input is bound to a property on the prototype newMember object -->
-                    <input type="text" name="title" id="title" ng-model="task.title" required autofocus/>
+                    <input type="text" name="title" id="title" ng-model="task.title" ng-blur="submit(task)" required autofocus/>
                     <span class="error" ng-show="errors.title">{{errors.title}}</span>
                 </form>
             </td>
