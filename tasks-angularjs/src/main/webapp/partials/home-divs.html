@@ -18,56 +18,50 @@
 <!-- This is a partial, and is templated by AngularJS -->
     <h1 class="text-center">todos</h1>
     
-    <div class="notepad">
-      <div class="display-controls" ng-hide="tasks.length == 0">
-          <div class="items-remaining col-md-6">
-              <span class="number-left">{{taskCount - completedTaskCount}}</span>
-              <span ng-show="remainingTaskCount == 0">item</span>
-              <span ng-hide="remainingTaskCount == 0">items</span>
-              remaining
-          </div>
-          <div class="items-filter col-md-6 text-right">
-              <input type="radio" value="all" ng-model="display" ng-click="redisplay()" id="display-all"><label class="radio-inline" for="display-all">All</label>
-              <input type="radio" value="active" ng-model="display" ng-click="redisplay()" id="display-active"><label class="radio-inline" for="display-active">Active</label>
-              <input type="radio" value="complete" ng-model="display" ng-selected="redisplay()" id="display-complete"><label class="radio-inline" for="display-complete">Completed</label>
-          </div>
-      </div>
-      <ul>
-        <li>
-            <div class="notepad-margin">
+    <table class="notepad">
+        <tr>
+            <td class="notepad-margin">
                 <i class="icon-double-angle-down" ng-click="markAllComplete(true)" ng-hide="taskCount == completedTaskCount"/>
                 <i class="icon-double-angle-down completed" ng-click="markAllComplete(false)" ng-show="taskCount == completedTaskCount"/>
-            </div>
-            <div class="notepad-main new-task">
+            </td>
+            <td class="notepad-main new-task">
                 <!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
                 <form id="add" ng-submit="submit(newTask)">
                     <!-- Each input is bound to a property on the prototype newMember object -->
                     <input type="text" name="title" id="title" ng-model="newTask.title" placeholder="What needs to be done?"  ng-blur="submit(newTask)" autofocus/>
                     <span class="error" ng-show="errors.title">{{errors.title}}</span>
                 </form>
-            </div>
-        </li>
+            </td>
+        </tr>
         <!-- The table is built using the AngularJS repeat function, iterating over the members variable, and ordering by the property specified in the orderBy variable -->
-        <li ng-repeat="task in tasks | filter:search | filter:displayFilter" ng-class="{'completed': task.complete, 'not-completed': !task.complete}">
-            <div class="notepad-margin" ng-class="">
-              <i ng-show="task.complete" class="icon-check completed" ng-click="markComplete(task, false)"/>
-              <i ng-hide="task.complete" class="icon-check-empty" ng-click="markComplete(task, true)"/>
-            </div>
-            <div class="notepad-main show-task" ng-hide="task.editing" ng-click="setEditFlag(task)">
-                <span class="task-name"> {{task.title}}</span>
-            </div>
-            <div class="notepad-main edit-task" ng-show="task.editing">
+        <tr ng-repeat="task in tasks | filter:search | filter:displayFilter">
+            <td class="notepad-margin"><i ng-show="task.complete" class="icon-ok completed" ng-click="markComplete(task, false)"/><i ng-hide="task.complete" class="icon-ok" ng-click="markComplete(task, true)"/></td>
+            <td class="notepad-main show-task" ng-hide="task.editing" ng-click="setEditFlag(task)">
+                {{task.title}}
+            </td>
+            <td class="notepad-main edit-task" ng-show="task.editing">
                 <!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
                 <form id="add" ng-submit="submit(task)">
                     <!-- Each input is bound to a property on the prototype newMember object -->
                     <input type="text" name="title" id="title" ng-model="task.title" ng-blur="submit(task)" required autofocus/>
                     <span class="error" ng-show="errors.title">{{errors.title}}</span>
                 </form>
-            </div>
-        </li>
-      </ul>
+            </td>
+        </tr>
+    </table>
+    <div class="row display-controls" ng-hide="tasks.length == 0">
+        <div class="col-sm-offset-1 col-xs-4">
+            {{taskCount - completedTaskCount}}
+            <span ng-show="remainingTaskCount == 0">item</span>
+            <span ng-hide="remainingTaskCount == 0">items</span>
+            remaining
+        </div>
+        <div class="col-xs-7">
+            <input type="radio" value="all" ng-model="display" ng-click="redisplay()" id="display-all"><label class="radio-inline" for="display-all">All</label>
+            <input type="radio" value="active" ng-model="display" ng-click="redisplay()" id="display-active"><label class="radio-inline" for="display-active">Active</label>
+            <input type="radio" value="complete" ng-model="display" ng-selected="redisplay()" id="display-complete"><label class="radio-inline" for="display-complete">Completed</label>
+        </div>
     </div>
-
     <div class="row help">
         Click to edit a todo
     </div>
