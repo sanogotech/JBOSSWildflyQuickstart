@@ -7,7 +7,7 @@ h1 {
 }
 
 #content {
-  width:50%;
+  max-width:800px;
   margin:0 auto;
 }
 
@@ -31,17 +31,15 @@ h1 {
   .display-controls span.number-left {
     background: #2D3640;   
     color:#fff;
-  
     padding: 3px 7px;
     border-radius: 5px;
     margin-right: 3px;
-}
+  }
  
-/*
-
 /*
  Change the font weight for the checked element
 */
+
 .display-controls input[type=radio]:checked + label{ 
    font-weight: bold;
 }
@@ -119,14 +117,6 @@ h1 {
   font-size:12px;
 }
 
-.notepad-margin {
-  /*background-image: url('../img/notepad-margin.jpg');*/
-}
-
-.notepad-main {
-    /*background-image: url('../img/notepad-main.jpg');*/
-}
-
 .notepad td {
   padding-left: 10px;
   background-position: left bottom;
@@ -161,4 +151,17 @@ input:focus:invalid:focus, input[type="text"]:focus {
   border: 0px;
   box-shadow: 0px 0px 0px 0px;
   outline: 0px;
+}
+
+
+/* Media Queries for responsive version */
+
+@media (max-width: 800px) {
+  body {
+    margin:0;
+    padding:0;
+  }
+  .row {
+    margin:0;
+  }
 }
